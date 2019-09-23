@@ -3,19 +3,25 @@ from scipy.io.wavfile import write
 import Sound
 
 SOUND_RECORD = {
-    "Emma":Sound("Emma")
+    "Emma":Sound.Sound("Emma")
 
 }
 
 
 
 
-def recordSound__Emma():
-    fileNumberActualSaveRecord=open(SOUND_RECORD["Emma_Settings"]+"\LearnSet.txt")
-    print(fileNumberActualSaveRecord.readline())
+#def recordSound(nameSound):
+   # fileNumberActualSaveRecord=open(SOUND_RECORD
+  #  print(fileNumberActualSaveRecord.readline())
 
 
-recordSound__Emma()
+
+
+sounde = SOUND_RECORD["Emma"]
+sounde.addNewRecord()
+print(sounde)
+
+#recordSound__Emma()
 
 
 #fs = 44100  # Sample rate
