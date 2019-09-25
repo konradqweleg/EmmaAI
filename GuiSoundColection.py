@@ -1,6 +1,10 @@
 import tkinter as tk
-
+import MyGUIElem as mg
 import PIL
+from PIL import ImageTk, Image
+import MyGUIFrame as myFrame
+
+
 
 
 class Application(tk.Frame):
@@ -9,126 +13,58 @@ class Application(tk.Frame):
 
         self.master = master
         self.pack()
-
-        self.tworzWidzety_1()
-        self.configure(background='LightYellow2')
-
-    def on_enter(self,e):
-        self.przyciskWyslijLogin['background'] = 'lavender'
-
-
-    def on_leave(self,e):
-        self.przyciskWyslijLogin['background'] = 'SystemButtonFace'
-
-    def on_enter2(self, e):
-        self.uwierzytelnijEtap_1['background'] = 'lavender'
-
-    def on_leave2(self, e):
-        self.uwierzytelnijEtap_1['background'] = 'SystemButtonFace'
-
-    def on_enter3(self, e):
-        self.wprowadzPodpis['background'] = 'lavender'
-
-    def on_leave3(self, e):
-        self.wprowadzPodpis['background'] = 'SystemButtonFace'
-
-    def on_enter4(self, e):
-        self.zaloguj_2etap['background'] = 'lavender'
-
-    def on_leave4(self, e):
-        self.zaloguj_2etap['background'] = 'SystemButtonFace'
-
-    def tworzWidzety_1(self):
-
-        from PIL import ImageTk, Image
-        from PIL import ImageTk, Image
-        self.informacjaOPodanieLoginu = tk.Label(self, height=3, width=20, font="Helvetica 20 bold")
-        self.informacjaOPodanieLoginu["text"] = "Emma Sound Collections \n"
-        self.informacjaOPodanieLoginu.configure(background='LightYellow2')
-        self.informacjaOPodanieLoginu.grid(row=1, columnspan=3)
-
-        self.photo = ImageTk.PhotoImage(Image.open("img/klient.png"))
-       # self.photo= ImageTk.PhotoImage(image=PIL.Image.fromarray("img/klienty.png"))
-        self.b = tk.Label(self, image=self.photo, height=64, width=64)
-
-        self.b.grid(row=2, column=0,padx=20, pady=20)
-        self.b.configure(background='LightYellow2')
+        self.createWidget()
         self.configure(background='LightYellow2')
 
 
-      #  self.wprowadzLogin = tk.Entry(self, width=10, justify="center", font="Helvetica 20 bold")
-
-     #   self.wprowadzLogin.grid(row=2, column=1)
-
-
-        self.przyciskWyslijLogin = tk.Button(self, text="Record sound", fg="black",borderwidth=6,
-                             command=self.sprawdzCzyPoprawnyLoginIWyslijSMS, height=1, width=15, font="Helvetica 20 bold",cursor="hand1")
-        self.przyciskWyslijLogin.bind("<Enter>", self.on_enter)
-        self.przyciskWyslijLogin.bind("<Leave>", self.on_leave)
-        self.przyciskWyslijLogin.grid(row=2,column=1,columnspan=2,padx=20, pady=20)
+    def createWidget(self):
 
 
 
-      #  self.informacjaOPodanieTokenu = tk.Label(self,height = 3, width = 20,font = "Helvetica 20 bold")
-       # self.informacjaOPodanieTokenu["text"] = "Wprowadź kod dostępu \n"
-       # self.informacjaOPodanieTokenu.grid(row=3,columnspan=3)
-        #self.informacjaOPodanieTokenu.configure(background='LightYellow2')
-
-        self.photo2 = ImageTk.PhotoImage(file="img/dodaj.png")
-        self.b2 = tk.Label(self, image=self.photo2, height=64, width=64)
-        self.b2.configure(background='LightYellow2')
+        self.descriptionApp = mg.MyLabel(self,text="Emma Sound Collections \n")
 
 
-        self.b2.grid(row=3, column=0)
+        self.imageRecordSound = mg.MyLabelPhoto(self, height=64, width=64)
+        self.imageRecordSound.addPhotoRecordSound()
+        self.recordSoundButton = mg.MyButton(self, text="Record sound",
+                                             command=self.setFrameRecordSound)
 
-        #self.wprowadzToken=tk.Entry(self,width = 10, justify="center",show="*",font = "Helvetica 20 bold")
-        #self.wprowadzToken.grid(row=3,column=1)
 
-        self.uwierzytelnijEtap_1 = tk.Button(self, text="Add new record", fg="black",
-                             command=self.uwierzytelniketap_1,height = 1, width = 15,font = "Helvetica 20 bold",cursor="hand1",borderwidth=6,)
-        self.uwierzytelnijEtap_1.grid(row=3,column=2,columnspan=2,padx=20,pady=20)
+        self.imageAddNewRecord=mg.MyLabelPhoto(self,height=64,width=64)
+        self.imageAddNewRecord.addPhotoNewRecord()
+        self.addNewRecordButton = mg.MyButton(self, text="Add new record" )
 
-        self.uwierzytelnijEtap_1.bind("<Enter>", self.on_enter2)
-        self.uwierzytelnijEtap_1.bind("<Leave>", self.on_leave2)
 
-        self.photo3 = ImageTk.PhotoImage(file="img/ustawienia.png")
-        self.b3 = tk.Label(self, image=self.photo3, height=64, width=64)
-        self.b3.configure(background='LightYellow2')
-
-        self.b3.grid(row=4, column=0)
-
-        self.przyciskWyslijLogin2 = tk.Button(self, text="Settings & info", fg="black", borderwidth=6,
-                                             command=self.sprawdzCzyPoprawnyLoginIWyslijSMS, height=1, width=15,
-                                             font="Helvetica 20 bold", cursor="hand1")
-        self.przyciskWyslijLogin2.bind("<Enter>", self.on_enter)
-        self.przyciskWyslijLogin2.bind("<Leave>", self.on_leave)
-        self.przyciskWyslijLogin2.grid(row=4, column=1, columnspan=2, padx=20, pady=20)
+        self.imageSettingsAndInfo = mg.MyLabelPhoto(self, height=64, width=64)
+        self.imageSettingsAndInfo.addPhotoSettingsAndInfo()
+        self.settingsAndInfoButton = mg.MyButton(self, text="Settings & info")
 
 
 
+        self.descriptionApp.grid(row=1, columnspan=3)
+
+        self.imageRecordSound.grid(row=2, column=0, padx=20, pady=20)
+        self.recordSoundButton.grid(row=2, column=1, columnspan=2, padx=20, pady=20)
+
+        self.imageAddNewRecord.grid(row=3, column=0)
+        self.addNewRecordButton.grid(row=3,column=2,columnspan=2,padx=20,pady=20)
+
+        self.imageSettingsAndInfo.grid(row=4, column=0)
+        self.settingsAndInfoButton.grid(row=4, column=1, columnspan=2, padx=20, pady=20)
 
 
 
+        self.backgroundPhoto = mg.MyLabelPhoto()
+        self.backgroundPhoto.addBackgroundImage()
 
 
 
-
-        path = 'img/sd.png'
-        image = Image.open(path)
+        self.backgroundPhoto.pack(pady=20)
 
 
 
-
-        photo = ImageTk.PhotoImage(image)
-
-        self.label = tk.Label(image=photo)
-        self.label.image = photo
-        self.label.configure(background='LightYellow2')
-        self.configure(background='LightYellow2')
-        #self.label.grid(row=5,columnspan=3)
-        self.label.pack(pady=20)
-
-
+    def setFrameRecordSound(self):
+        pass
 
     def sprawdzCzyPoprawnyLoginIWyslijSMS(self):
 
