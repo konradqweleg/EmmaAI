@@ -23,6 +23,62 @@ class MyLabel(tk.Label):
         tk.Label.__init__(self, *args, **kwargs)
         self.configure(height=3, width=20, font="Helvetica 20 bold",background='LightYellow2')
 
+class MyLabelListElem(tk.Label):
+    listElem=[]
+    choiceElem=None
+
+    def __init__(self, *args, **kwargs):
+        tk.Label.__init__(self, *args, **kwargs)
+        self.configure(height=2, width=15, font="Helvetica 15 bold",background='LightYellow2',borderwidth=2, relief="groove")
+
+        self.bind("<Button-1>", lambda e: self.changeColor())
+        MyLabelListElem.listElem.append(self)
+
+    def setColorBackgroundNoActive(self):
+        self.configure(background="LightYellow2")
+
+
+
+
+    def setColoroActive(self):
+        self.configure(background="powder blue")
+        choiceElem=self
+
+    def changeColor(self):
+        self.configure(background="powder blue")
+        choiceElem=self
+
+        for elem in MyLabelListElem.listElem:
+            if(elem!=self):
+                elem.setColorBackgroundNoActive()
+
+class MyLabelStartRecord(tk.Label):
+    listElem = []
+
+
+    def __init__(self, *args, **kwargs):
+            tk.Label.__init__(self, *args, **kwargs)
+            self.configure(height=2, width=15, font="Helvetica 15 bold", background='LightYellow2', borderwidth=2,
+                           relief="groove")
+
+            MyLabelStartRecord.listElem.append(self)
+            MyLabelStartRecord.listElem[0].setColoroDefault()
+
+    def setColorBackgroundNoActive(self):
+            self.configure(background="LightYellow2")
+
+
+    def setColoroDefault(self):
+        self.configure(background="red2")
+
+
+    def changeColorToActive(self):
+        self.configure(background="green1")
+
+
+
+
+
 
 class MyLabelPhoto(tk.Label):
 

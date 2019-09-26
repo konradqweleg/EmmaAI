@@ -3,7 +3,9 @@ import MyGUIElem as mg
 import PIL
 from PIL import ImageTk, Image
 import MyGUIFrame as myFrame
-
+import tkinter, sys
+from tkinter import *
+import tkinter.messagebox as messagebox
 
 
 
@@ -64,7 +66,47 @@ class Application(tk.Frame):
 
 
     def setFrameRecordSound(self):
-        pass
+        self.clearGraphicInterface()
+        self.createWidgetTwoPart()
+
+
+
+    def createWidgetTwoPart(self):
+        from tkinter import font
+
+        self.recordSoundText = mg.MyLabel(self, text="Record Sound \n")
+        self.recordSoundText.grid(column=0,row=0,columnspan=3)
+        small_font = font.Font(size=25)  #
+        self.recordButton = mg.MyButton(self, text="Recording")
+        self.recordButton.configure(width=26)
+        self.recordButton.grid(row=4,column=0,columnspan=3,pady=10)
+
+
+        self.on=mg.MyLabelStartRecord(self,text="Off")
+        self.on.grid(row=3,column=0)
+#        self.on.setColoroActive()
+
+        self.on2 = mg.MyLabelStartRecord(self, text="On")
+        self.on2.grid(row=3, column=1)
+ #       self.on2.setColoroActive()
+
+        self.opis=mg.MyLabelListElem(self,text="Emma")
+        self.opis.grid(row=1,column=0)
+        self.opis.setColoroActive()
+        self.opisp = mg.MyLabelListElem(self, text="Pogoda")
+        self.opisp.grid(row=2, column=0)
+
+        #self.Lb1 = Listbox(self,height=2,width=10,background='LightYellow2',font=small_font)
+        #self.buton=mg.MyButton(text="ww")
+        #self.Lb1.insert(1, "Emma")
+        #self.Lb1.insert(2, "Pogoda")
+        #self.Lb1.insert(3, "C")
+        #self.Lb1.insert(4, "PHP")
+       # self.Lb1.insert(5, "JSP")
+        #self.Lb1.insert(6, self.button)
+
+       # self.Lb1.grid(row=1,column=0)
+
 
     def sprawdzCzyPoprawnyLoginIWyslijSMS(self):
 
@@ -75,7 +117,7 @@ class Application(tk.Frame):
             sms.wyslijSMS(sl.sprawdzJakiJestNumerTelefonuUsera(self.wprowadzLogin.get()),str(kod.zwrocKodDostepu()))
 
 
-    def czyscInterfejs(self):
+    def clearGraphicInterface(self):
         for widget in self.winfo_children():
             widget.destroy()
 
