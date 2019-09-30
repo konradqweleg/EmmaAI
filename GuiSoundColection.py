@@ -1,5 +1,6 @@
 import tkinter as tk
 import MyGUIElem as mg
+import Sounds
 import PIL
 from PIL import ImageTk, Image
 import MyGUIFrame as myFrame
@@ -21,7 +22,7 @@ class Application(tk.Frame):
 
     def createWidget(self):
 
-
+        self.clearGraphicInterface()
 
         self.descriptionApp = mg.MyLabel(self,text="Emma Sound Collections \n")
 
@@ -54,14 +55,15 @@ class Application(tk.Frame):
         self.imageSettingsAndInfo.grid(row=4, column=0)
         self.settingsAndInfoButton.grid(row=4, column=1, columnspan=2, padx=20, pady=20)
 
+        try:
+            self.backgroundPhoto == None
 
 
-        self.backgroundPhoto = mg.MyLabelPhoto()
-        self.backgroundPhoto.addBackgroundImage()
+        except AttributeError:
+            self.backgroundPhoto = mg.MyLabelPhoto()
+            self.backgroundPhoto.addBackgroundImage()
+            self.backgroundPhoto.pack(pady=20)
 
-
-
-        self.backgroundPhoto.pack(pady=20)
 
 
 
@@ -74,38 +76,69 @@ class Application(tk.Frame):
     def createWidgetTwoPart(self):
         from tkinter import font
 
-        self.recordSoundText = mg.MyLabel(self, text="Record Sound \n")
-        self.recordSoundText.grid(column=0,row=0,columnspan=3)
+        self.recordSoundText = mg.MyLabel(self, text="Record Sound \n",anchor='w')
+        self.recordSoundText.grid(column=1,row=0,columnspan=3)
+
+        self.returnMenulLabel=mg.MyLabelReturnMenu(self)
+        self.returnMenulLabel.grid(column=0,row=0,sticky='wn',padx=20)
+        self.returnMenulLabel.bind("<Button-1>",lambda x:( self.createWidget()))
+
+
+
+        mg.MyLabelListElem.listElem=[]
+        mg.MyLabelListElem.choiceElem=[]
+        mg.MyLabelStartRecord.listElem=[]
+
+
+        self.offRecordInfo=mg.MyLabelStartRecord(self,text="Off")
+        self.offRecordInfo.grid(row=4,column=0,columnspan=2,pady=20,padx=3)
+
+
+        self.onRecordInfo = mg.MyLabelStartRecord(self, text="On")
+        self.onRecordInfo.grid(row=4, column=1,columnspan=2,pady=20,padx=3)
+
+
+        self.soundEmma=mg.MyLabelListElem(self,text="Emma")
+        self.soundEmma.grid(row=1,column=0,padx=3,pady=2)
+        self.soundEmma.setColoroActive()
+        self.soundPogoda = mg.MyLabelListElem(self, text="Pogoda")
+        self.soundPogoda.grid(row=2, column=0,padx=3,pady=2)
+
         small_font = font.Font(size=25)  #
         self.recordButton = mg.MyButton(self, text="Recording")
-        self.recordButton.configure(width=26)
-        self.recordButton.grid(row=4,column=0,columnspan=3,pady=10)
+        self.recordButton.configure(width=30)
+        self.recordButton.bind("<ButtonRelease-1>", lambda e: self.recording())
+        self.recordButton.grid(row=5, column=0, columnspan=3, pady=10)
+
+      
+
+    def setRecordColor(self):
+        self.offRecordInfo.setColorEmpty()
+        self.onRecordInfo.changeColorToActive()
+
+        Tk.update(self)
 
 
-        self.on=mg.MyLabelStartRecord(self,text="Off")
-        self.on.grid(row=3,column=0)
-#        self.on.setColoroActive()
+    def setNoRecordColor(self):
+        self.onRecordInfo.setColorEmpty()
+        self.offRecordInfo.setColoroDefault()
 
-        self.on2 = mg.MyLabelStartRecord(self, text="On")
-        self.on2.grid(row=3, column=1)
- #       self.on2.setColoroActive()
+        Tk.update(self)
 
-        self.opis=mg.MyLabelListElem(self,text="Emma")
-        self.opis.grid(row=1,column=0)
-        self.opis.setColoroActive()
-        self.opisp = mg.MyLabelListElem(self, text="Pogoda")
-        self.opisp.grid(row=2, column=0)
 
-        #self.Lb1 = Listbox(self,height=2,width=10,background='LightYellow2',font=small_font)
-        #self.buton=mg.MyButton(text="ww")
-        #self.Lb1.insert(1, "Emma")
-        #self.Lb1.insert(2, "Pogoda")
-        #self.Lb1.insert(3, "C")
-        #self.Lb1.insert(4, "PHP")
-       # self.Lb1.insert(5, "JSP")
-        #self.Lb1.insert(6, self.button)
 
-       # self.Lb1.grid(row=1,column=0)
+    def recording(self):
+        self.setRecordColor()
+
+        sounde = Sounds.SOUND_RECORD[mg.MyLabelListElem.textElem]
+        sounde.addNewRecord()
+        print(sounde)
+        self.setNoRecordColor()
+
+
+
+
+
 
 
     def sprawdzCzyPoprawnyLoginIWyslijSMS(self):
@@ -118,8 +151,19 @@ class Application(tk.Frame):
 
 
     def clearGraphicInterface(self):
+
         for widget in self.winfo_children():
             widget.destroy()
+
+
+
+
+
+
+
+
+
+
 
     def wprowadzPodpisMetoda(self):
         from tkinter import filedialog

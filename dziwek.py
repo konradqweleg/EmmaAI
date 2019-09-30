@@ -1,9 +1,9 @@
 import sounddevice as sd
 from scipy.io.wavfile import write
-import Sound
+import Sounds
 
 SOUND_RECORD = {
-    "Emma":Sound.Sound("Emma")
+    "Emma":Sounds.Sound("Emma")
 
 }
 
