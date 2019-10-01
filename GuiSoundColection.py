@@ -21,7 +21,7 @@ class Application(tk.Frame):
 
 
     def createWidget(self):
-
+        self.readOptionToRecordFromFile()
         self.clearGraphicInterface()
 
         self.descriptionApp = mg.MyLabel(self,text="Emma Sound Collections \n")
@@ -35,7 +35,7 @@ class Application(tk.Frame):
 
         self.imageAddNewRecord=mg.MyLabelPhoto(self,height=64,width=64)
         self.imageAddNewRecord.addPhotoNewRecord()
-        self.addNewRecordButton = mg.MyButton(self, text="Add new record" )
+        self.addNewRecordButton = mg.MyButton(self, text="Add new record",command=self.setFrameAddNewRecord )
 
 
         self.imageSettingsAndInfo = mg.MyLabelPhoto(self, height=64, width=64)
@@ -71,6 +71,24 @@ class Application(tk.Frame):
         self.clearGraphicInterface()
         self.createWidgetTwoPart()
 
+    def setFrameAddNewRecord(self):
+        self.clearGraphicInterface()
+        self.createWidgetAddNewRecord()
+
+
+
+    def readOptionToRecordFromFile(self):
+        records=open("records.txt","r",encoding="utf-8")
+        Sounds.SOUND_RECORD.clear()
+        line = records.readline()
+
+        while line:
+            line = line.replace('\n','')
+            Sounds.SOUND_RECORD[line]=Sounds.Sound(line)
+            line = records.readline()
+
+        records.close()
+
 
 
     def createWidgetTwoPart(self):
@@ -90,27 +108,58 @@ class Application(tk.Frame):
         mg.MyLabelStartRecord.listElem=[]
 
 
-        self.offRecordInfo=mg.MyLabelStartRecord(self,text="Off")
-        self.offRecordInfo.grid(row=4,column=0,columnspan=2,pady=20,padx=3)
 
+
+
+
+        row=1
+        column=0
+        self.recordElem=[]
+
+
+
+       # self.soundEmma=mg.MyLabelListElem(self,text="Emma")
+       # self.soundEmma.grid(row=1,column=0,padx=3,pady=2)
+       # self.soundEmma.setColoroActive()
+
+        self.recordElem.append(mg.MyLabelListElem(self,text="Emma"))
+        self.recordElem[0].grid(row=1,column=0)
+        self.recordElem[0].setColoroActive()
+
+        index=1
+        for key, value in Sounds.SOUND_RECORD.items():
+
+            if(key!="Emma"):
+
+                if(column<2):
+                    column+=1
+
+                else:
+                    column=0
+                    row+=1
+
+
+                self.recordElem.append( mg.MyLabelListElem(self, text=key))
+                self.recordElem[index].grid(row=row, column=column,padx=3,pady=2)
+                index += 1
+
+
+       # self.soundPogoda = mg.MyLabelListElem(self, text="Pogoda")
+       # self.soundPogoda.grid(row=2, column=0,padx=3,pady=2)
+
+        self.offRecordInfo = mg.MyLabelStartRecord(self, text="Off")
+        self.offRecordInfo.grid(row=(row+1), column=0, columnspan=2, pady=20, padx=3)
 
         self.onRecordInfo = mg.MyLabelStartRecord(self, text="On")
-        self.onRecordInfo.grid(row=4, column=1,columnspan=2,pady=20,padx=3)
-
-
-        self.soundEmma=mg.MyLabelListElem(self,text="Emma")
-        self.soundEmma.grid(row=1,column=0,padx=3,pady=2)
-        self.soundEmma.setColoroActive()
-        self.soundPogoda = mg.MyLabelListElem(self, text="Pogoda")
-        self.soundPogoda.grid(row=2, column=0,padx=3,pady=2)
+        self.onRecordInfo.grid(row=(row+1), column=1, columnspan=2, pady=20, padx=3)
 
         small_font = font.Font(size=25)  #
         self.recordButton = mg.MyButton(self, text="Recording")
-        self.recordButton.configure(width=30)
+        self.recordButton.configure(width=20)
         self.recordButton.bind("<ButtonRelease-1>", lambda e: self.recording())
-        self.recordButton.grid(row=5, column=0, columnspan=3, pady=10)
+        self.recordButton.grid(row=(row+2), column=0, columnspan=3, pady=10)
 
-      
+
 
     def setRecordColor(self):
         self.offRecordInfo.setColorEmpty()
@@ -134,6 +183,43 @@ class Application(tk.Frame):
         sounde.addNewRecord()
         print(sounde)
         self.setNoRecordColor()
+
+
+    def createWidgetAddNewRecord(self):
+
+        self.addNewRecordText = mg.MyLabel(self, text="Add new record \n", anchor='w')
+        self.addNewRecordText.grid(column=1, row=0, columnspan=3)
+
+        self.returnMenulLabelOfNewRecord = mg.MyLabelReturnMenu(self)
+        self.returnMenulLabelOfNewRecord.grid(column=0, row=0, sticky='wn', padx=20)
+        self.returnMenulLabelOfNewRecord.bind("<Button-1>", lambda x: (self.createWidget()))
+
+        self.inputNameSound=mg.MyEntry(self)
+
+        self.inputNameSound.grid(column=0,row=1,columnspan=3,padx=10)
+
+        self.infoMessage=mg.MyLabelInfo(self)
+        self.infoMessage.grid(column=0,row=2,columnspan=3)
+
+        self.addNewRecordText=mg.MyButton(self,text="Add new record",command=self.addNewRecordUntilRecording)
+        self.addNewRecordText.grid(column=0,row=3,columnspan=3)
+
+
+    def addNewRecordUntilRecording(self):
+
+        if(self.inputNameSound.checkValidateName()):
+            self.infoMessage.setInfoMessage(self.inputNameSound.getInfoMessageAfterClickAddRecord())
+            self.addNewRecordToFile(self.inputNameSound.get())
+            self.readOptionToRecordFromFile()
+
+        else:
+            self.infoMessage.setErrorMessage(self.inputNameSound.getInfoMessageAfterClickAddRecord())
+
+    def addNewRecordToFile(self,nameNew):
+
+        records = open("records.txt","a+",encoding="utf-8")
+        records.write(nameNew+"\n")
+        records.close()
 
 
 
@@ -249,7 +335,7 @@ class Application(tk.Frame):
 root = tk.Tk()
 root.iconbitmap('C:\\Users\\polsk\\PycharmProjects\\Sound\\img\\micro.ico')
 root.title("Emma Sound Record")
-root.geometry("500x750")
+root.geometry("590x750")
 root.configure(background='LightYellow2')
 root.resizable(False, False)
 app = Application(master=root)

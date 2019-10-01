@@ -5,11 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GuiSoundColection.py" beforeDir="false" afterPath="$PROJECT_DIR$/GuiSoundColection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyGUIElem.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyGUIElem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Record/SoundEmma/Learn/ 7.wav" beforeDir="false" afterPath="$PROJECT_DIR$/Record/SoundEmma/Learn/ 7.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sound.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sounds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sounds.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Emma/LearnSet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Emma/LearnSet.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Emma/TestSet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Emma/TestSet.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dziwek.py" beforeDir="false" afterPath="$PROJECT_DIR$/dziwek.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Pogoda/LearnSet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/StatisticsOfRecordSound/Sound_Pogoda/LearnSet.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GuiSoundColection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="162" column="9" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+            <state relative-caret-position="195">
+              <caret line="183" column="8" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -47,7 +46,7 @@
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/tkinter/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="1478" selection-start-line="1478" selection-end-line="1478" />
+              <caret line="2219" selection-start-line="2219" selection-end-line="2219" />
             </state>
           </provider>
         </entry>
@@ -67,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyGUIElem.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="53" column="48" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
+            <state relative-caret-position="-1981">
+              <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -79,8 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sounds.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+            <state relative-caret-position="374">
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -107,14 +106,15 @@
         <option value="$PROJECT_DIR$/MyGUIFrame.py" />
         <option value="$PROJECT_DIR$/dziwek.py" />
         <option value="$PROJECT_DIR$/Sound.py" />
-        <option value="$PROJECT_DIR$/MyGUIElem.py" />
         <option value="$PROJECT_DIR$/Sounds.py" />
+        <option value="$PROJECT_DIR$/MyGUIElem.py" />
         <option value="$PROJECT_DIR$/GuiSoundColection.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="621" />
+    <option name="y" value="152" />
     <option name="width" value="734" />
     <option name="height" value="867" />
   </component>
@@ -124,7 +124,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -147,6 +146,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -212,6 +212,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Sounds" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Sound" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Sounds.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="dziwek" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Sound" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -236,6 +257,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.GuiSoundColection" />
+        <item itemvalue="Python.Sounds" />
         <item itemvalue="Python.dziwek" />
         <item itemvalue="Python.MyGUIElem" />
       </list>
@@ -271,7 +293,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17066291" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -308,7 +329,7 @@
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="1478" selection-start-line="1478" selection-end-line="1478" />
+          <caret line="2219" selection-start-line="2219" selection-end-line="2219" />
         </state>
       </provider>
     </entry>
@@ -332,30 +353,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyGUIElem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="53" column="48" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sounds.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        <state relative-caret-position="374">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MyGUIElem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1981">
+          <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GuiSoundColection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="162" column="9" selection-start-line="162" selection-start-column="9" selection-end-line="162" selection-end-column="9" />
+        <state relative-caret-position="195">
+          <caret line="183" column="8" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

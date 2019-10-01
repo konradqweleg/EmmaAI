@@ -129,6 +129,59 @@ class MyLabelReturnMenu(tk.Label):
 
 
 
+class MyEntry(tk.Entry):
+    def __init__(self, *args, **kwargs):
+        tk.Entry.__init__(self, *args, **kwargs)
+        self.textNewRecord = tk.StringVar()
+        self.textNewRecord.set("Default value")
+        from tkinter import font
+        small_font = font.Font(size=25)
+        self.configure(background='LightYellow2', width=24,textvariable=self.textNewRecord,justify='center',font=small_font)
+
+
+    def checkValidateName(self):
+        if (self.textNewRecord.get() == "Default value"):
+            return False
+        if (len(self.textNewRecord.get()) == 0):
+            return False
+        import Sounds
+        if self.textNewRecord.get() in Sounds.SOUND_RECORD:
+            return False
+
+        return True
+
+
+    def getInfoMessageAfterClickAddRecord(self):
+        if(self.textNewRecord.get()=="Default value"):
+            return "Enter name new record"
+        if(len(self.textNewRecord.get())==0):
+            return "Enter text"
+        import Sounds
+        if self.textNewRecord.get() in Sounds.SOUND_RECORD:
+            return "This name record exist"
+
+        return "Add "+self.textNewRecord.get()
+
+
+    def getNameNewRecord(self):
+        return self.textNewRecord
+
+
+
+class MyLabelInfo(tk.Label):
+    def __init__(self, *args, **kwargs):
+        tk.Label.__init__(self, *args, **kwargs)
+
+        from tkinter import font
+        small_font = font.Font(size=15)
+        self.configure(background='LightYellow2', width=20,height=2,justify='center',font=small_font,fg="red",text="")
+
+
+    def setErrorMessage(self,errorText):
+        self.configure(text=errorText,fg="red")
+
+    def setInfoMessage(self,infoText):
+        self.configure(text=infoText,fg="green")
 
 
 

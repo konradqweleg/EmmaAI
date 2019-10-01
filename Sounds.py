@@ -91,3 +91,4 @@ SOUND_RECORD = {
     "Pogoda": Sound("Pogoda")
 
 }
+
