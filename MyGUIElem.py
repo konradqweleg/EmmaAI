@@ -32,7 +32,7 @@ class MyLabelListElem(tk.Label):
 
     def __init__(self, *args, **kwargs):
         tk.Label.__init__(self, *args, **kwargs)
-        self.configure(height=2, width=15, font="Helvetica 15 bold",background='LightYellow2',borderwidth=2, relief="groove",cursor="hand1")
+        self.configure(height=2, width=13, font="Helvetica 15 bold",background='LightYellow2',borderwidth=2, relief="groove",cursor="hand1")
 
         self.bind("<Button-1>", lambda e: self.changeColor())
         MyLabelListElem.listElem.append(self)
@@ -65,7 +65,7 @@ class MyLabelStartRecord(tk.Label):
 
     def __init__(self, *args, **kwargs):
             tk.Label.__init__(self, *args, **kwargs)
-            self.configure(height=2, width=17, font="Helvetica 15 bold", background='LightYellow2', borderwidth=2,
+            self.configure(height=2, width=15, font="Helvetica 15 bold", background='LightYellow2', borderwidth=2,
                            relief="groove")
 
 
@@ -118,14 +118,26 @@ class MyLabelPhoto(tk.Label):
         self.photo = ImageTk.PhotoImage(Image.open("img/zs4logo.png"))
         self.configure(image=self.photo)
 
+    def addPhotoExit(self):
+        self.photo=ImageTk.PhotoImage(Image.open("img/exitImage.png"))
+        self.configure(image=self.photo)
+
 
 class MyLabelReturnMenu(tk.Label):
 
     def __init__(self, *args, **kwargs):
         tk.Label.__init__(self, *args, **kwargs)
-        self.configure(background='LightYellow2',width=64,height=64)
+        self.configure(background='LightYellow2',width=64,height=64,pady=3)
         self.photo=ImageTk.PhotoImage(Image.open("img/returnMenuButton.png"))
         self.configure(image=self.photo,cursor="hand1")
+
+
+class EmptyLabel(tk.Label):
+    def __init__(self, *args, **kwargs):
+        tk.Label.__init__(self, *args, **kwargs)
+        self.configure(height=2, width=13, font="Helvetica 15 bold", background='LightYellow2',
+                        )
+
 
 
 
@@ -136,7 +148,7 @@ class MyEntry(tk.Entry):
         self.textNewRecord.set("Default value")
         from tkinter import font
         small_font = font.Font(size=25)
-        self.configure(background='LightYellow2', width=24,textvariable=self.textNewRecord,justify='center',font=small_font)
+        self.configure(background='LightYellow2', width=19,textvariable=self.textNewRecord,justify='center',font=small_font)
 
 
     def checkValidateName(self):
@@ -145,11 +157,14 @@ class MyEntry(tk.Entry):
         if (len(self.textNewRecord.get()) == 0):
             return False
         import Sounds
-        if self.textNewRecord.get() in Sounds.SOUND_RECORD:
+        if self.modifyNameRecordToFormat(self.textNewRecord.get()) in Sounds.SOUND_RECORD:
             return False
 
         return True
 
+    def modifyNameRecordToFormat(self, nameSound):
+        changeTextFormat = lambda s: s[:1].upper() + s[1:].lower() if s else ''
+        return changeTextFormat(nameSound)
 
     def getInfoMessageAfterClickAddRecord(self):
         if(self.textNewRecord.get()=="Default value"):
@@ -157,10 +172,10 @@ class MyEntry(tk.Entry):
         if(len(self.textNewRecord.get())==0):
             return "Enter text"
         import Sounds
-        if self.textNewRecord.get() in Sounds.SOUND_RECORD:
+        if self.modifyNameRecordToFormat(self.textNewRecord.get()) in Sounds.SOUND_RECORD:
             return "This name record exist"
 
-        return "Add "+self.textNewRecord.get()
+        return "Add "+self.modifyNameRecordToFormat(self.textNewRecord.get())
 
 
     def getNameNewRecord(self):
@@ -173,8 +188,8 @@ class MyLabelInfo(tk.Label):
         tk.Label.__init__(self, *args, **kwargs)
 
         from tkinter import font
-        small_font = font.Font(size=15)
-        self.configure(background='LightYellow2', width=20,height=2,justify='center',font=small_font,fg="red",text="")
+        small_font = font.Font(size=13)
+        self.configure(background='LightYellow2', width=38,height=2,justify='center',font=small_font,fg="red",text="")
 
 
     def setErrorMessage(self,errorText):
