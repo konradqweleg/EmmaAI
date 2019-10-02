@@ -1,6 +1,7 @@
 import tkinter as tk
 import MyGUIElem as mg
 import Sounds
+import os
 import PIL
 from PIL import ImageTk, Image
 import MyGUIFrame as myFrame
@@ -210,6 +211,7 @@ class Application(tk.Frame):
         if(self.inputNameSound.checkValidateName()):
             self.infoMessage.setInfoMessage(self.inputNameSound.getInfoMessageAfterClickAddRecord())
             self.addNewRecordToFile(self.inputNameSound.get())
+            self.createCatalogStructure(self.inputNameSound.get())
             self.readOptionToRecordFromFile()
 
         else:
@@ -221,8 +223,23 @@ class Application(tk.Frame):
         records.write(nameNew+"\n")
         records.close()
 
+    def createCatalogStructure(self,nameSound):
+        os.mkdir("StatisticsOfRecordSound\\Sound_"+nameSound)
+        self.createConfigurationSound(nameSound)
+        self.createFolderWithSampleSound(nameSound)
 
+    def createConfigurationSound(self,nameSound):
+        learnSet = open("StatisticsOfRecordSound\\Sound_"+nameSound+'\\LearnSet.txt', 'w+')
+        testSet = open("StatisticsOfRecordSound\\Sound_"+nameSound+'\\TestSet.txt', 'w+')
+        learnSet.write("0"+"\n")
+        testSet.write("0"+"\n")
+        learnSet.close()
+        testSet.close()
 
+    def createFolderWithSampleSound(self,nameSound):
+        os.mkdir("Record\\Sound" + nameSound)
+        os.mkdir("Record\\Sound" + nameSound+"\\Learn")
+        os.mkdir("Record\\Sound" + nameSound + "\\Test")
 
 
 
@@ -332,13 +349,17 @@ class Application(tk.Frame):
 
 
 
+
 root = tk.Tk()
 root.iconbitmap('C:\\Users\\polsk\\PycharmProjects\\Sound\\img\\micro.ico')
 root.title("Emma Sound Record")
-root.geometry("590x750")
+root.geometry("1440x750")
 root.configure(background='LightYellow2')
 root.resizable(False, False)
-app = Application(master=root)
 
+root.overrideredirect(True)
+root.overrideredirect(False)
+root.attributes('-fullscreen',True)
+app = Application(master=root)
 app.mainloop()
 
