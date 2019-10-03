@@ -2,7 +2,8 @@ import tkinter as tk
 import MyGUIElem as mg
 import Sounds
 import os
-import PIL
+
+from PIL import Image
 from PIL import ImageTk, Image
 import MyGUIFrame as myFrame
 import tkinter, sys
@@ -10,6 +11,15 @@ from tkinter import *
 import tkinter.messagebox as messagebox
 
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -86,7 +96,7 @@ class Application(tk.Frame):
 
 
     def readOptionToRecordFromFile(self):
-        records=open("records.txt","r",encoding="utf-8")
+        records=open(resource_path("records.txt"),"r",encoding="utf-8")
         Sounds.SOUND_RECORD.clear()
         line = records.readline()
 
@@ -189,7 +199,7 @@ class Application(tk.Frame):
 
         sounde = Sounds.SOUND_RECORD[mg.MyLabelListElem.textElem]
         sounde.addNewRecord()
-        print(sounde)
+       # print(sounde)
         self.setNoRecordColor()
 
 
@@ -257,27 +267,27 @@ class Application(tk.Frame):
 
     def addNewRecordToFile(self,nameNew):
 
-        records = open("records.txt","a+",encoding="utf-8")
+        records = open(resource_path("records.txt"),"a+",encoding="utf-8")
         records.write(nameNew+"\n")
         records.close()
 
     def createCatalogStructure(self,nameSound):
-        os.mkdir("StatisticsOfRecordSound\\Sound_"+nameSound)
+        os.mkdir(resource_path("StatisticsOfRecordSound\\Sound_"+nameSound))
         self.createConfigurationSound(nameSound)
         self.createFolderWithSampleSound(nameSound)
 
     def createConfigurationSound(self,nameSound):
-        learnSet = open("StatisticsOfRecordSound\\Sound_"+nameSound+'\\LearnSet.txt', 'w+')
-        testSet = open("StatisticsOfRecordSound\\Sound_"+nameSound+'\\TestSet.txt', 'w+')
+        learnSet = open(resource_path("StatisticsOfRecordSound\\Sound_"+nameSound+'\\LearnSet.txt'), 'w+')
+        testSet = open(resource_path("StatisticsOfRecordSound\\Sound_"+nameSound+'\\TestSet.txt'), 'w+')
         learnSet.write("0"+"\n")
         testSet.write("0"+"\n")
         learnSet.close()
         testSet.close()
 
     def createFolderWithSampleSound(self,nameSound):
-        os.mkdir("Record\\Sound" + nameSound)
-        os.mkdir("Record\\Sound" + nameSound+"\\Learn")
-        os.mkdir("Record\\Sound" + nameSound + "\\Test")
+        os.mkdir(resource_path("Record\\Sound" + nameSound))
+        os.mkdir(resource_path("Record\\Sound" + nameSound+"\\Learn"))
+        os.mkdir(resource_path("Record\\Sound" + nameSound + "\\Test"))
 
 
 
@@ -401,3 +411,4 @@ root.attributes('-fullscreen',True)
 app = Application(master=root)
 app.mainloop()
 
+ss=input("ww")

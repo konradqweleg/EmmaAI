@@ -9,15 +9,24 @@ HOW_IS_LEARN_SET=6
 SAMPLE_RATE = 44100  # Sample rate
 DURATION_RECORD = 5  # Duration of recording
 
+import os
+import sys
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
-
+    return os.path.join(base_path, relative_path)
 class Sound:
     def __init__(self,nameSound):
-        self.__localeRecordLearnFolder=Path("Record\Sound"+nameSound+"\Learn\ ")
-        self.__localeRecordTestFolder=Path("Record\Sound"+nameSound+"\Test\ ")
-        self.__settingsRecordLearnSound=Path("StatisticsOfRecordSound"+"\Sound_"+nameSound+"\LearnSet.txt")
-        self.__settingsRecordTestSound = Path("StatisticsOfRecordSound" + "\Sound_" + nameSound + "\TestSet.txt")
+        self.__localeRecordLearnFolder=Path(resource_path("Record\Sound"+nameSound+"\Learn\ "))
+        self.__localeRecordTestFolder=Path(resource_path("Record\Sound"+nameSound+"\Test\ "))
+        self.__settingsRecordLearnSound=Path(resource_path("StatisticsOfRecordSound"+"\Sound_"+nameSound+"\LearnSet.txt"))
+        self.__settingsRecordTestSound = Path(resource_path("StatisticsOfRecordSound" + "\Sound_" + nameSound + "\TestSet.txt"))
         self.__nameSound=nameSound
 
 

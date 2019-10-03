@@ -1,6 +1,19 @@
 import tkinter as tk
+
 from PIL import ImageTk, Image
 import PIL
+
+import sys
+import os
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class MyButton(tk.Button):
 
@@ -103,23 +116,23 @@ class MyLabelPhoto(tk.Label):
         self.configure(background='LightYellow2')
 
     def addPhotoNewRecord(self):
-       self.photo = ImageTk.PhotoImage(Image.open("img/addNewRecordImage.png"))
+       self.photo = ImageTk.PhotoImage(Image.open(resource_path("img/addNewRecordImage.png")))
        self.configure(image=self.photo)
 
     def addPhotoRecordSound(self):
-        self.photo = ImageTk.PhotoImage(Image.open("img/recordSoundImage.png"))
+        self.photo = ImageTk.PhotoImage(Image.open(resource_path("img/recordSoundImage.png")))
         self.configure(image=self.photo)
 
     def addPhotoSettingsAndInfo(self):
-        self.photo = ImageTk.PhotoImage(Image.open("img/settingsAndInfoImage.png"))
+        self.photo = ImageTk.PhotoImage(Image.open(resource_path("img/settingsAndInfoImage.png")))
         self.configure(image=self.photo)
 
     def addBackgroundImage(self):
-        self.photo = ImageTk.PhotoImage(Image.open("img/zs4logo.png"))
+        self.photo = ImageTk.PhotoImage(Image.open(resource_path("img/zs4logo.png")))
         self.configure(image=self.photo)
 
     def addPhotoExit(self):
-        self.photo=ImageTk.PhotoImage(Image.open("img/exitImage.png"))
+        self.photo=ImageTk.PhotoImage(Image.open(resource_path("img/exitImage.png")))
         self.configure(image=self.photo)
 
 
@@ -128,7 +141,7 @@ class MyLabelReturnMenu(tk.Label):
     def __init__(self, *args, **kwargs):
         tk.Label.__init__(self, *args, **kwargs)
         self.configure(background='LightYellow2',width=64,height=64,pady=3)
-        self.photo=ImageTk.PhotoImage(Image.open("img/returnMenuButton.png"))
+        self.photo=ImageTk.PhotoImage(Image.open(resource_path("img/returnMenuButton.png")))
         self.configure(image=self.photo,cursor="hand1")
 
 
